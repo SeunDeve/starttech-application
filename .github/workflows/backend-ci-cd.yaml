@@ -18,7 +18,7 @@ on:
 env:
   AWS_REGION:       ${{ secrets.AWS_REGION }}
   ECR_REGISTRY:     ${{ secrets.ECR_REGISTRY }}
-  ECR_REPOSITORY:   starttech-backend-api
+  ECR_REPOSITORY:   starttech-backend
   EKS_CLUSTER_NAME: starttech-cluster
   IMAGE_TAG:        ${{ github.sha }}
 
