@@ -1,5 +1,4 @@
 name: Backend CI/CD
-
 on:
   push:
     branches:
@@ -66,27 +65,6 @@ jobs:
       (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
     outputs:
       image: ${{ steps.build-image.outputs.image }}
-
-
-
-      - name: Login to ECR
-  id: login-ecr
-  uses: aws-actions/amazon-ecr-login@v2
-
-- name: Build and push image
-  id: build
-  working-directory: backend/MuchToDo
-  run: |
-    REGISTRY=${{ steps.login-ecr.outputs.registry }}
-    IMAGE=$REGISTRY/${{ env.ECR_REPOSITORY }}:${{ github.sha }}
-    LATEST=$REGISTRY/${{ env.ECR_REPOSITORY }}:latest
-
-    docker build -t $IMAGE -t $LATEST .
-    docker push $IMAGE
-    docker push $LATEST
-
-    echo "image=$IMAGE" >> $GITHUB_OUTPUT
-    echo "Built: $IMAGE"
 
     steps:
       - name: Checkout code
