@@ -37,15 +37,14 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
-          go-version: '1.25'
-          cache: true
+          go-version: '1.21'
           cache-dependency-path: backend/MuchToDo/go.sum
 
-      - name: Download dependencies
+      - name: Download modules
         run: go mod download
 
       - name: Run tests
-        run: go test ./... -v -cover
+        run: go test ./... 
         env:
           MONGO_URI:           ${{ secrets.MONGO_URI }}
           DB_NAME:             starttech
@@ -94,7 +93,7 @@ jobs:
           docker build \
             -t $IMAGE_URI \
             -t $LATEST_URI \
-            -f backend/MuchToDo/Dockerfile \
+            -f backend/Dockerfile \
             backend/MuchToDo
 
           echo "image=$IMAGE_URI" >> $GITHUB_OUTPUT
