@@ -1,5 +1,5 @@
 # ─── Stage 1: Builder ───────────────────────────────────────────────────────
-FROM golang:1.25-alpine AS builder
+FROM golang:1.23-alpine AS builder
 
 RUN apk --no-cache add ca-certificates
 
@@ -25,8 +25,6 @@ WORKDIR /app
 
 # Copy CA certificates for HTTPS/MongoDB TLS
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
-
-# Copy compiled binary
 COPY --from=builder /app/bin/starttech-api .
 
 # Create non-root user
