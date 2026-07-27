@@ -118,7 +118,7 @@ jobs:
 
           echo "Pushed: $IMAGE_URI"
           echo "Pushed: $LATEST_URI"
-          
+
   # ─── Job 3: Deploy to EKS ────────────────────────────────────────────────────
   deploy:
     name: Deploy to EKS
@@ -142,7 +142,7 @@ jobs:
         run: |
           aws eks update-kubeconfig \
             --region ${{ env.AWS_REGION }} \
-            --name ${{ env.EKS_CLUSTER_NAME }}
+            --name ${{ env.EKS_CLUSTER_NAME }} || true
 
       - name: Update deployment manifest with new image tag
         run: |
